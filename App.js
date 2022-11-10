@@ -28,9 +28,7 @@ export default function App() {
   };
 
   const DeleteItem = () =>{
-    console.log(itemSelect)
     setItemList((currentState) => currentState.filter((item) => item.id !==itemSelect.id));
-    console.log(itemList)
     setItemSelect({})
     setModalVisibility(false)
   };
