@@ -3,9 +3,13 @@ import { useState } from 'react';
 import StartGame from "./Screens/StartGame";
 import Header1 from "./components/Header1";
 import GameScreen from "./Screens/GameScreen";
+import { useFonts } from "expo-font";
 
 
 export default function App() {
+  const [loaded] = useFonts({
+    RubikBubbles: require('./assets/fonts/RubikBubbles-Regular.ttf'),
+  })
 
   const [userNumber, setUserNumber] = useState();
 
@@ -18,6 +22,10 @@ export default function App() {
 
   if (userNumber) {
     content = <GameScreen />;
+  }
+
+  if(!loaded) {
+    return null
   }
 
   return (
