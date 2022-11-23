@@ -1,40 +1,47 @@
-import React from "react";
-import { Text, View, StyleSheet, Pressable, TouchableWithoutFeedback, Keyboard, Button } from "react-native";
-import Input from "../components/Input"
-import { useState } from 'react';
+import {Pressable, StyleSheet, Text, TouchableWithoutFeedback, View, Keyboard, Button, TextInput} from "react-native";
+import React, { useState } from "react";
+import colors from "../constants/colors";
 
-const StartGame =({onGameStart})=>{
-    const [value, SetValue] = useState ("")
-    const [confirmed, SetConfirmed] = useState (false)
-    const [selectNumber, SetSelectNumber] = useState ("")
-
+const StartGame =({onStartGame})=>{
+    const [value, setValue] = useState("");
+    const [confirmed, setConfirmed] = useState(false);
+    const [selectedNumber, setSelectedNumber] = useState("");
+  
     const handleConfirmation = () => {
-        const chonseNumber = parseInt(value)
-        if (chonseNumber === NaN || chonseNumber <= 0 || chonseNumber > 99)return
-        SetConfirmed(true)
-        SetSelectNumber(chonseNumber)
-        SetValue("")
-    }
-
-    const handleResertInput = () => {
-        SetValue("")
-        SetConfirmed(false)
-    }
-
-    const handleInput = (text) =>{
-        //  SetValue(text)
-        SetValue(text.replace(/[^0-9]/g,""))
-        console.log(value)
-    }
+      const choseNumber = parseInt(value);
+      if (choseNumber === NaN || choseNumber <= 0 || choseNumber > 99) return;
+  
+      setConfirmed(true);
+      setSelectedNumber(choseNumber);
+      setValue("");
+    };
+  
+    const handleResetInput = () => {
+      setValue("");
+      setConfirmed(false);
+    };
+  
+    const handleInput = (text) => {
+      console.log(text);
+      setValue(text.replace(/[^0-9]/g, ""));
+    };
 
     return(
-        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}> 
                 <View style={styles.inputContianer}>
                     <Text>Select a Number</Text>
-                    <Input value={value} onChangeText={text=>handleInput(text)}/>
+                    <TextInput
+                        value={value} onChangeText={handleInput}
+                        blurOnSubmit
+                        autoCapitalization="none"
+                        autoCorrect={false}
+                        keyboardType="numeric"
+                        maxLength={2}
+                        style={styles.Input}
+                    />
                     <View style={styles.buttonContianer}>
-                        <Pressable style={styles.buttonClean} onPress={handleResertInput}>
+                        <Pressable style={styles.buttonClean} onPress={handleResetInput}>
                             <Text>Clean</Text>
                         </Pressable>
                         <Pressable style={styles.buttonOk} onPress={handleConfirmation}>
@@ -45,8 +52,8 @@ const StartGame =({onGameStart})=>{
                 {confirmed && (
                     <View style={styles.inputContianer}>
                         <Text>Select a Number</Text>
-                        <Text>{selectNumber}</Text>
-                        <Button title="Start Game" onPress={()=> onGameStart(selectNumber)}></Button>
+                        <Text>{selectedNumber}</Text>
+                        <Button title="Start Game" onPress={() => onStartGame(selectedNumber)} />
                     </View>
                 )}
             </View>
@@ -67,13 +74,13 @@ const styles = StyleSheet.create({
         width:300,
         padding:20,
         alignItems:"center",
-        shadowColor:"blue",
+        shadowColor: colors.shadowColor,
         shadowOffset:{width:0,height:2},
         shadowRadius:6,
         shadowOpacity:0.5,
         elevation:3,
         borderRadius:10,
-        backgroundColor:"white"
+        backgroundColor: colors.white
     },
     buttonContianer:{
         flexDirection: "row",
@@ -81,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     buttonClean:{
-        backgroundColor:"gray",
+        backgroundColor: colors.backgroundColorClearBtn,
         height:35,
         width:70,
         justifyContent:"center",
@@ -89,11 +96,17 @@ const styles = StyleSheet.create({
         borderRadius:10,
     },
     buttonOk:{
-        backgroundColor:"green",
+        backgroundColor:colors.backgroundColorOkBtn,
         height:35,
         width:70,
         justifyContent:"center",
         alignItems:"center",
         borderRadius:10,
+    },
+    Input:{
+        height:30,
+        borderBottomColor:"black",
+        borderBottomWidth:2,
+        marginVertical:10,
     }
 })

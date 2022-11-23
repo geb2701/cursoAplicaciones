@@ -2,18 +2,22 @@ import {StyleSheet, View} from 'react-native';
 import { useState } from 'react';
 import StartGame from "./Screens/StartGame";
 import Header1 from "./components/Header1";
+import GameScreen from "./Screens/GameScreen";
+
 
 export default function App() {
-  const [userNumber, setUserNumber] = useState ()
 
-  const handleStartGame = ()=>{
-    setUserNumber(selctedNumber)
-  }
+  const [userNumber, setUserNumber] = useState();
 
-  let content= <StartGame onGameStart={selctedNumber}/>
+  const handleStartGame = (selectedNumber) => {
+    setUserNumber(selectedNumber);
+  };
 
-  if(userNumber){
-    content =<GameStart/>
+  let content = <StartGame onStartGame={handleStartGame} />;
+
+
+  if (userNumber) {
+    content = <GameScreen />;
   }
 
   return (
