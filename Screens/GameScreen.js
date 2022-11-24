@@ -1,23 +1,32 @@
 import React from "react";
-import {View, StyleSheet, Button, Text } from "react-native";
+import {View, StyleSheet, Button, Text, Dimensions} from "react-native";
 import { useState, useEffect } from 'react';
 import colors from "../constants/colors";
 
-const GameScreen = () =>{
-    const [currentGame, SetCurrentGame] = useState();
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
+
+const GameScreen = ({ handleResult }) => {
+    const [currentGuess, setCurrentGuess] = useState();
 
     useEffect(() => {
-        SetCurrentGame(Math.floor(Math.random() * (100 - 1) + 1));
-      }, []);
-   
+        setCurrentGuess(Math.floor(Math.random() * (100 - 1) + 1));
+    }, []);
+
     return (
         <View style={styles.screen}>
             <View style={styles.Contianer}>
-                <Text>Oponet Player</Text>
-                <Text>{currentGame}</Text>
+                <Text>Oponet Player Number</Text>
+                <Text>{currentGuess}</Text>
                 <View style={styles.buttonContainer}>
-                    <Button title="-"></Button>
-                    <Button title="+"></Button>
+                <Button
+                    title="Menor"
+                    onPress={() => handleResult("lower", currentGuess)}
+                    />
+                    <Button
+                    title="Mayor"
+                    onPress={() => handleResult("greater", currentGuess)}
+                    />
                 </View>
             </View>
         </View>
@@ -32,7 +41,9 @@ const styles = StyleSheet.create({
         marginTop:50
     },
     Contianer:{
-        width:300,
+        width: width / 1.2,
+        minWidth:200,
+        maxWidth:450,
         padding:20,
         alignItems:"center",
         shadowColor: colors.shadowColor,
@@ -44,12 +55,16 @@ const styles = StyleSheet.create({
         backgroundColor: colors.backgroundColorContainer,
     },
     buttonContainer: {
+      padding:10,
       flexDirection: "row",
       justifyContent: "space-between",
       marginTop: 20,
-      width: 300,
+      width:'100%',
     },
-    
+    button: {
+        padding:10,
+        width:'50%',
+    },
 })
 
 export default GameScreen

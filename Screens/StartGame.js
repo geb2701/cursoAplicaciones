@@ -1,6 +1,9 @@
-import {Pressable, StyleSheet, Text, TouchableWithoutFeedback, View, Keyboard, Button, TextInput} from "react-native";
+import {Pressable, StyleSheet, Text, TouchableWithoutFeedback, View, Keyboard, Button, TextInput, Dimensions} from "react-native";
 import React, { useState } from "react";
 import colors from "../constants/colors";
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 const StartGame =({onStartGame})=>{
     const [value, setValue] = useState("");
@@ -71,7 +74,9 @@ const styles = StyleSheet.create({
         marginTop:50
     },
     inputContianer:{
-        width:300,
+        width: width / 1.2,
+        minWidth:200,
+        maxWidth:450,
         padding:20,
         alignItems:"center",
         shadowColor: colors.shadowColor,
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
     buttonClean:{
         backgroundColor: colors.backgroundColorClearBtn,
         height:35,
-        width:70,
+        width:'30%',
         justifyContent:"center",
         alignItems:"center",
         borderRadius:10,
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     buttonOk:{
         backgroundColor:colors.backgroundColorOkBtn,
         height:35,
-        width:70,
+        width:'30%',
         justifyContent:"center",
         alignItems:"center",
         borderRadius:10,
