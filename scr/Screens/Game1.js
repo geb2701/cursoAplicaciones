@@ -1,15 +1,15 @@
 import {StyleSheet, View} from 'react-native';
 import { useState } from 'react';
-import StartGame from "./Screens/StartGame";
-import Header1 from "./components/Header1";
-import GameScreen from "./Screens/GameScreen";
+import StartGame from "./StartGame";
+import Header from "../components/Header";
+import GameScreen from "./GameScreen";
 import { useFonts } from "expo-font";
-import FinishGame from "./Screens/FinishGame";
+import FinishGame from "./FinishGame";
 
 
 export default function App() {
   const [loaded] = useFonts({
-    RubikBubbles: require("./assets/fonts/RubikBubbles-Regular.ttf"),
+    RubikBubbles: require("../../assets/fonts/RubikBubbles-Regular.ttf"),
   });
 
   const [userNumber, setUserNumber] = useState();
@@ -46,7 +46,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Header1 titule={"Game 1"}/>
+      <Header titule={"Game 1"}/>
       {content}
     </View>
   );

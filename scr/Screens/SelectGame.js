@@ -1,6 +1,6 @@
 import { Button, StyleSheet, Text, View,Dimensions } from "react-native";
 import React from "react";
-import colors from "./constants/colors";
+import colors from "../constants/colors";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -16,6 +16,9 @@ const CategoriesScreen = ({navigation}) => {
         </View>
         <View style={styles.container}>
             <Button title="Go to Game 2" onPress={() => navigation.navigate("Juego2")} />
+        </View>
+        <View style={styles.container}>
+            <Button title="Go to Shop" onPress={() => navigation.navigate("Shop")} />
         </View>
     </View>
   );

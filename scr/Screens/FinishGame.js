@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-import win from "../assets/images/win.jpg";
-import lose from "../assets/images/lose.jpg";
+import win from "../../assets/images/win.jpg";
+import lose from "../../assets/images/lose.jpg";
 import colors from "../constants/colors";
 
 
