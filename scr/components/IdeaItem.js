@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 const IdeaItem = ({ item, onSelected }) => {
   return (
     <TouchableOpacity onPress={() => onSelected(item)}>
-      <View style={styles.breadItem}>
+      <View style={styles.item}>
         <View>
           <Text style={styles.title}>{item.name}</Text>
         </View>
@@ -16,7 +16,7 @@ const IdeaItem = ({ item, onSelected }) => {
 export default IdeaItem;
 
 const styles = StyleSheet.create({
-  breadItem: {
+  item: {
     padding: 20,
     margin: 10,
     borderRadius: 3,
